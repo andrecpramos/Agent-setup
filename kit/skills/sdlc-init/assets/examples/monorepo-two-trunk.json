@@ -1,0 +1,91 @@
+{
+  "$schema": "../sdlc.config.schema.json",
+  "version": 1,
+
+  "_comment": "A pnpm monorepo on main/develop with a shared working tree. Abridged from the kit's origin repo — see .claude/sdlc.config.json there for the full version. Shows the four features the simple example does not: `when` (path-scoped gates), `expectNonZero` (a command that exits non-zero by design), `guard.extraDeny` (a repo-specific denial), and `postEdit` (immediate feedback).",
+
+  "project": {
+    "name": "example-monorepo",
+    "kind": "monorepo",
+    "stack": ["TypeScript", "Node 23.6+", "pnpm 11"],
+    "packageManager": "pnpm",
+    "runtime": "node>=23.6"
+  },
+
+  "branching": {
+    "model": "two-trunk",
+    "production": "main",
+    "integration": "develop",
+    "featurePrefix": "feature/",
+    "releaseOnRequestOnly": true
+  },
+
+  "sharedTree": true,
+
+  "commits": {
+    "convention": "conventional",
+    "scopes": ["core", "domain", "ui", "web", "ci", "docs", "adr"]
+  },
+
+  "gates": [
+    {
+      "id": "import-boundaries",
+      "title": "Rule 1 — core never imports a domain",
+      "command": "node tooling/scripts/check-import-boundaries.mjs",
+      "blocking": true,
+      "rule": "1",
+      "fix": "The fix is a registration or a callback on the core side, never an import."
+    },
+    { "id": "typecheck", "command": "pnpm -r typecheck", "blocking": true },
+    { "id": "test", "command": "pnpm -r test", "blocking": true },
+    {
+      "id": "registry-stale",
+      "title": "Generated artefacts match the committed ones",
+      "command": "pnpm registry:build && git diff --quiet -- packages/domain-modules/generated",
+      "blocking": true,
+      "when": ["packages/domain-*/src/capabilities.ts"],
+      "fix": "pnpm registry:build, then stage the generated files in the same commit."
+    },
+    {
+      "id": "router-floor",
+      "title": "Deterministic floor run",
+      "command": "pnpm router:floor",
+      "blocking": false,
+      "expectNonZero": true,
+      "when": ["packages/core-intent/**"],
+      "fix": "Exits non-zero BY DESIGN. The gate is the scorecard comparison that follows it."
+    }
+  ],
+
+  "docs": {
+    "root": ".claude",
+    "rules": "PLAN.md",
+    "decisions": ".claude/decisions",
+    "plan": "PLAN.md"
+  },
+
+  "guard": {
+    "denyBroadStaging": true,
+    "denyProductionWrites": true,
+    "denyBranchFromProduction": true,
+    "extraDeny": [
+      {
+        "pattern": "pnpm\\s+registry:build:finance",
+        "reason": "Every domain's build writes the same shared registry path, so this silently replaces the registry the router reads.",
+        "instead": "pnpm registry:build"
+      }
+    ]
+  },
+
+  "postEdit": [
+    {
+      "paths": ["packages/core-*/**/*.ts"],
+      "run": "node tooling/scripts/check-import-boundaries.mjs",
+      "timeoutMs": 5000
+    },
+    {
+      "paths": ["packages/domain-*/src/capabilities.ts"],
+      "remind": "Declaration changed — generated artefacts are now stale. Run `pnpm registry:build` and commit the result in the same commit."
+    }
+  ]
+}

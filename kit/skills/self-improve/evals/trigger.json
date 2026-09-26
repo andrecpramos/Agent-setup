@@ -1,0 +1,18 @@
+[
+  { "query": "you keep using npm in this repo, it's pnpm. remember that for next time", "should_trigger": true },
+  { "query": "let's do a quick retro on this session before I close it", "should_trigger": true },
+  { "query": "that took an hour because the env file is loaded from config/ not the root — make sure no future session falls for that", "should_trigger": true },
+  { "query": "the frontend skill's advice about forms doesn't fit how we do it here, adapt it for this project", "should_trigger": true },
+  { "query": "from now on never run the e2e suite without starting the mock server first", "should_trigger": true },
+  { "query": "what have we learned this week that should go back into the shared agent kit?", "should_trigger": true },
+  { "query": "there are 5 items in .claude/learnings/inbox.md, process them", "should_trigger": true },
+  { "query": "improve your own skills based on what went wrong today", "should_trigger": true },
+  { "query": "lembra-te: neste projeto os testes de integração precisam do docker a correr", "should_trigger": true },
+  { "query": "write a post-mortem for yesterday's outage for the team", "should_trigger": false },
+  { "query": "evaluate whether the new system prompt for the chatbot is better than the old one", "should_trigger": false },
+  { "query": "write the handoff for tomorrow, I'm stopping here", "should_trigger": false },
+  { "query": "audit which of our CI rules are actually enforced", "should_trigger": false },
+  { "query": "refactor the user service to remove duplication", "should_trigger": false },
+  { "query": "set up the sdlc config and knowledge base for this repo", "should_trigger": false },
+  { "query": "add a unit test that reproduces the bug we just fixed", "should_trigger": false }
+]

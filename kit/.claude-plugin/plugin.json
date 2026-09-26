@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "agent-setup",
+  "displayName": "Agent Setup",
+  "version": "1.0.0",
+  "description": "Curated engineering skills (frontend, backend, API, security, architecture, design system, agent evals), visual design skills with brand DESIGN.md references and real-browser verification, SDLC workflow skills and review subagents. Project hooks, AGENTS.md and the learning loop are installed per project with the agent-setup CLI.",
+  "author": {
+    "name": "André Ramos"
+  },
+  "keywords": [
+    "skills",
+    "sdlc",
+    "security",
+    "architecture",
+    "evals",
+    "agents-md",
+    "design",
+    "frontend",
+    "browser"
+  ]
+}

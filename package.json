@@ -1,0 +1,20 @@
+{
+  "name": "agent-setup",
+  "version": "1.0.0",
+  "description": "A portable, self-improving agent setup for any repository: curated skills, subagents, guard hooks, AGENTS.md/CLAUDE.md, the sdlc-kit method, and a learning loop that feeds improvements back to the kit.",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "agent-setup": "bin/agent-setup.mjs"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\"",
+    "lint": "node bin/agent-setup.mjs lint",
+    "check": "node bin/agent-setup.mjs lint && node --test \"tests/*.test.mjs\""
+  },
+  "author": "André Ramos",
+  "license": "UNLICENSED"
+}

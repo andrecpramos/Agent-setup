@@ -1,0 +1,8 @@
+# agent-setup:begin
+# Local agent state — see .claude/learnings/README.md
+.claude/learnings/signals.jsonl
+.claude/agent-memory-local/
+.claude/settings.local.json
+CLAUDE.local.md
+{{AGENT_LINKS}}
+# agent-setup:end

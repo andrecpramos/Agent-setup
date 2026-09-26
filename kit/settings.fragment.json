@@ -1,0 +1,99 @@
+{
+  "$comment": "Merged into a project's .claude/settings.json by `agent-setup install/update`: permissions are unioned, hook handlers are added only where no equivalent handler already covers the event and tool, nothing existing is removed, and .claude/settings.local.json is never touched. Exec form (command + args) is used so no shell ever re-parses a path — the Windows `bash` on PATH can be WSL's, not Git Bash. File rules are Edit(...) only: Claude Code matches file permission checks against Edit rules, which cover every file-editing tool; Write(...) rules are ignored (found by an end-to-end run).",
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git merge-base:*)",
+      "Bash(git rev-list:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git symbolic-ref:*)",
+      "Bash(node .claude/skills/gates/scripts/run-gates.mjs:*)"
+    ],
+    "ask": [
+      "Edit(.claude/sdlc.config.json)",
+      "Edit(.claude/settings.json)",
+      "Edit(.claude/hooks/**)",
+      "Edit(.claude/decisions/**)",
+      "Edit(.claude/docs/rules.md)",
+      "Edit(.claude/docs/critical-infrastructure.md)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/branch-check.mjs"],
+            "timeout": 10,
+            "statusMessage": "Checking branch state"
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/learning-signals.mjs"],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/learning-signals.mjs"],
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-git.mjs"],
+            "timeout": 10,
+            "statusMessage": "Checking the command against the branching contract"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/check-gates.mjs"],
+            "timeout": 30,
+            "statusMessage": "Checking the gates this edit could break"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/learning-signals.mjs"],
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

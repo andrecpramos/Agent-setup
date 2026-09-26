@@ -1,0 +1,38 @@
+[
+  {
+    "query": "what is actually enforced in this repo vs just written down?",
+    "should_trigger": true
+  },
+  {
+    "query": "are our CI gates real or decorative?",
+    "should_trigger": true
+  },
+  {
+    "query": "audit our process rules before the release",
+    "should_trigger": true
+  },
+  {
+    "query": "we changed CI, re-audit the gap register",
+    "should_trigger": true
+  },
+  {
+    "query": "que regras deste repo não são verificadas por nada?",
+    "should_trigger": true
+  },
+  {
+    "query": "run the tests",
+    "should_trigger": false
+  },
+  {
+    "query": "set up the sdlc config for a fresh repo",
+    "should_trigger": false
+  },
+  {
+    "query": "security review of the auth module",
+    "should_trigger": false
+  },
+  {
+    "query": "add a lint rule for import boundaries",
+    "should_trigger": false
+  }
+]

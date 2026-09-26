@@ -1,0 +1,175 @@
+{
+  "repos": {
+    "taste-skill": {
+      "source": "github:Leonxlnx/taste-skill",
+      "fetchedFrom": "github",
+      "commit": "ce26fc25c0e5e8cab638f883de62d9a86ee5e45b"
+    },
+    "vercel-agent-skills": {
+      "source": "github:vercel-labs/agent-skills",
+      "fetchedFrom": "github",
+      "commit": "063bee94c3f4df8453406c830b0a7df0f2860278"
+    },
+    "agent-browser": {
+      "source": "github:vercel-labs/agent-browser",
+      "fetchedFrom": "github",
+      "commit": "d01253d9db28d75080e36da3c1c31ef89454731e"
+    },
+    "playwright-cli": {
+      "source": "github:microsoft/playwright-cli",
+      "fetchedFrom": "github",
+      "commit": "74354ecc7a43da16d91a9bc54fa8db8283a3fcf5"
+    },
+    "awesome-design-md": {
+      "source": "github:VoltAgent/awesome-design-md",
+      "fetchedFrom": "github",
+      "commit": "f6961238d5cddcf8042a74a70fc400ec67181abb"
+    }
+  },
+  "skills": [
+    {
+      "name": "design-taste-frontend",
+      "repo": "taste-skill",
+      "path": "skills/taste-skill",
+      "patched": false
+    },
+    {
+      "name": "gpt-taste",
+      "repo": "taste-skill",
+      "path": "skills/gpt-tasteskill",
+      "patched": true
+    },
+    {
+      "name": "image-to-code",
+      "repo": "taste-skill",
+      "path": "skills/image-to-code-skill",
+      "patched": true
+    },
+    {
+      "name": "imagegen-frontend-web",
+      "repo": "taste-skill",
+      "path": "skills/imagegen-frontend-web",
+      "patched": true
+    },
+    {
+      "name": "imagegen-frontend-mobile",
+      "repo": "taste-skill",
+      "path": "skills/imagegen-frontend-mobile",
+      "patched": true
+    },
+    {
+      "name": "brandkit",
+      "repo": "taste-skill",
+      "path": "skills/brandkit",
+      "patched": true
+    },
+    {
+      "name": "redesign-existing-projects",
+      "repo": "taste-skill",
+      "path": "skills/redesign-skill",
+      "patched": false
+    },
+    {
+      "name": "high-end-visual-design",
+      "repo": "taste-skill",
+      "path": "skills/soft-skill",
+      "patched": true
+    },
+    {
+      "name": "minimalist-ui",
+      "repo": "taste-skill",
+      "path": "skills/minimalist-skill",
+      "patched": true
+    },
+    {
+      "name": "industrial-brutalist-ui",
+      "repo": "taste-skill",
+      "path": "skills/brutalist-skill",
+      "patched": true
+    },
+    {
+      "name": "stitch-design-taste",
+      "repo": "taste-skill",
+      "path": "skills/stitch-skill",
+      "patched": true
+    },
+    {
+      "name": "full-output-enforcement",
+      "repo": "taste-skill",
+      "path": "skills/output-skill",
+      "patched": false
+    },
+    {
+      "name": "web-design-guidelines",
+      "repo": "vercel-agent-skills",
+      "path": "skills/web-design-guidelines",
+      "patched": true
+    },
+    {
+      "name": "agent-browser",
+      "repo": "agent-browser",
+      "path": "skills/agent-browser",
+      "patched": true
+    },
+    {
+      "name": "playwright-cli",
+      "repo": "playwright-cli",
+      "path": "skills/playwright-cli",
+      "patched": true
+    }
+  ],
+  "assets": [
+    {
+      "into": "design-md-library/assets/brands",
+      "repo": "awesome-design-md",
+      "count": 74
+    }
+  ],
+  "derived": {
+    "sdlc-kit": {
+      "recordedAt": "2026-09-26T10:34:39.896Z",
+      "files": {
+        "BOOTSTRAP.md": "773e1e4627feaaf553b7fb667778f56a",
+        "README.md": "8814268f6c30f623a5330495ee0119b7",
+        "examples/library-trunk.json": "e1cb9503ee8482dc62e5e2c8cc1d8854",
+        "examples/monorepo-two-trunk.json": "8e691ded89b105d9080ece75abf0021d",
+        "patterns/enforcement.md": "eb0648b4767aec197448c32c66077adc",
+        "patterns/workflow.md": "fc694a32204ae2e001d8241826754b42",
+        "runtime/hooks/_config.mjs": "b684314549673c16b1cf0f26e9dd057d",
+        "runtime/hooks/branch-check.mjs": "a97299ad968405317b3e2cba5636c7bb",
+        "runtime/hooks/check-gates.mjs": "2dbae0dd3fea25a0dfdd3e8c2915b8d2",
+        "runtime/hooks/guard-git.mjs": "95c03f5d037c516b058846b5173cecc0",
+        "runtime/settings.json": "184bcd8f6d6d8bab3c72fd905e96fc9f",
+        "sdlc.config.schema.json": "74891d7ba306135121fddd628d0a0e22",
+        "templates/README.md": "f565d33983a702c71d0522c48340aed2",
+        "templates/decisions/ADR-000-template.md": "c2f3f897d07680f2afb40cad5fad84d0",
+        "templates/decisions/README.md": "8b2cdeddf5433eb1d8eae36d2e2f35bb",
+        "templates/docs/architecture.md": "23e85cb1b56ccf8ec3be2f7047686bb0",
+        "templates/docs/coding-standards.md": "bd259be0516644790dd1c00a93258b24",
+        "templates/docs/critical-infrastructure.md": "a22eaaeddf1ec06368cbc9f5ed9a898b",
+        "templates/docs/project.md": "495dcd67f5e1c775de17b69f778440b3",
+        "templates/docs/rules.md": "7d11c0a96900b54ca90f08c85a5eb804",
+        "templates/docs/security.md": "dbdcde3b2f99231cffaa540d828081f2",
+        "templates/docs/testing.md": "e171c19aff00c0450bceb7ea84b4c8d6",
+        "templates/docs/vision.md": "64176877885c2f1b84199019c07c2ee4",
+        "templates/roles/ai-engineer.md": "4d03be2a8a26eaee43fa09ad2b78f8c8",
+        "templates/roles/architect.md": "5239b20728ac3cbe00a0e44186b1fe92",
+        "templates/roles/backend.md": "ef7f569d324c23fc0c2d94485c3b0e2a",
+        "templates/roles/devops.md": "e916a5209db83142eeca8035d857b3de",
+        "templates/roles/frontend.md": "91cddf58ac57840b4e4fdfc1d596561d",
+        "templates/roles/qa.md": "4938336d4ad374d636f0f2933211bb0c",
+        "templates/sdlc/agent-workflow.md": "84468ee1ddb5ffd46144ecc6fbee87bd",
+        "templates/sdlc/branching.md": "88dbb458903e593b3af80517d1c72008",
+        "templates/sdlc/ci-cd.md": "2318955e4a7e36d1d0b07ed58ace2357",
+        "templates/sdlc/deployment.md": "c4c139105623c4a8ba40a356ea89b5f0",
+        "templates/sdlc/design.md": "2c842207e17ab24a7f6bfcf412807601",
+        "templates/sdlc/development.md": "57cda2734b17d45fddf551b19187034a",
+        "templates/sdlc/maintenance.md": "8420ea82b45ee30139fde23e79a5eb69",
+        "templates/sdlc/planning.md": "2f5d84b43169bffe3117b0ef6fd36fc7",
+        "templates/sdlc/requirements.md": "0610ecb2cdc3c6abe18e5fb61fa363f2",
+        "templates/sdlc/testing.md": "c8fa2965054472b35cf72a7e66b7bcba",
+        "tooling/check-kit-sync.mjs": "4b867ed12c996a62d8498cb76926279c"
+      }
+    }
+  }
+}

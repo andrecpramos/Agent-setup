@@ -1,0 +1,58 @@
+{
+  "$comment": "Every skill and agent in the kit, its group, and the install profiles. The installer reads this; `agent-setup lint` checks it against kit/skills and kit/agents. Profiles list skill names or @group; the `core` list is always installed. Which skills are vendored (rebuilt from upstream, never hand-edited) is recorded in kit/vendor.json, not here.",
+  "groups": {
+    "domain": "Engineering expertise, written for this kit: loads when the work matches the domain",
+    "core": "The delivery workflow and the learning loop — installed in every project",
+    "design": "Visual design direction, brand references and real-browser verification, sequenced by frontend-design-workflow — opt-in"
+  },
+  "skills": {
+    "frontend": { "group": "domain", "summary": "UI components, pages, forms, client/server state, accessibility, frontend performance and tests" },
+    "backend": { "group": "domain", "summary": "Domain logic, persistence, migrations, transactions, concurrency, jobs, caching, observability" },
+    "api-design": { "group": "domain", "summary": "The middle layer: HTTP/GraphQL/gRPC contracts, BFFs, middleware, webhooks, third-party integrations" },
+    "security": { "group": "domain", "summary": "Threat modelling, secure implementation, and security review of a change" },
+    "architecture": { "group": "domain", "summary": "Boundaries, dependency rules, trade-off decisions and ADRs" },
+    "design-system": { "group": "domain", "summary": "Tokens, theming, shared components, and the checks that keep UI on-system" },
+    "agent-eval": { "group": "domain", "summary": "Evals for prompts, agents, LLM features and skills; baselines and regression gates" },
+    "self-improve": { "group": "core", "summary": "Capture lessons, route them to where they are enforced, export kit improvements" },
+    "sdlc-init": { "group": "core", "summary": "Survey the repo; write its SDLC contract, knowledge base, overlays and gap register" },
+    "gates": { "group": "core", "summary": "Run the repo's gates exactly as CI does, cheapest first, and report PASS/FAIL" },
+    "ship-it": { "group": "core", "summary": "Commit and open a PR the way this repo expects — never into production uninvited" },
+    "handoff": { "group": "core", "summary": "Write a precise handoff so the next session continues without re-deriving context" },
+    "enforcement-audit": { "group": "core", "summary": "Audit what the repo claims against what it enforces; ranked gap register" },
+    "frontend-design-workflow": { "group": "design", "summary": "Entry point for visual design work: checks the environment, sizes the task, runs the design pipeline, settles conflicts" },
+    "design-md-library": { "group": "design", "summary": "74 brand DESIGN.md systems (Linear, Stripe, Vercel…) adapted into the project, never cloned" },
+    "design-taste-frontend": { "group": "design", "summary": "Default design build skill: brief inference, design dials, anti-slop rules, pre-flight check" },
+    "gpt-taste": { "group": "design", "summary": "Design build skill for GPT-family models on motion-heavy briefs" },
+    "image-to-code": { "group": "design", "summary": "Image-first build when the agent can generate images: comps first, then code" },
+    "imagegen-frontend-web": { "group": "design", "summary": "Website design comps as images, one per section (no code)" },
+    "imagegen-frontend-mobile": { "group": "design", "summary": "Mobile app screen concepts and flows as images (no code)" },
+    "brandkit": { "group": "design", "summary": "Brand identity boards as images: logo directions, palettes, typography (no code)" },
+    "redesign-existing-projects": { "group": "design", "summary": "Audit checklist and fix order for upgrading an existing site's design" },
+    "high-end-visual-design": { "group": "design", "summary": "Style layer: soft, calm, premium (at most one style layer per project)" },
+    "minimalist-ui": { "group": "design", "summary": "Style layer: editorial, Notion/Linear-like, monochrome" },
+    "industrial-brutalist-ui": { "group": "design", "summary": "Style layer: Swiss typography, terminal, raw" },
+    "stitch-design-taste": { "group": "design", "summary": "Writes the project's DESIGN.md so the design system persists across sessions and tools" },
+    "full-output-enforcement": { "group": "design", "summary": "Stops truncated output on large generations" },
+    "web-design-guidelines": { "group": "design", "summary": "Audits UI code against Vercel's Web Interface Guidelines" },
+    "agent-browser": { "group": "design", "summary": "Default real-browser verification: screenshots, theme emulation, console, axe audit" },
+    "playwright-cli": { "group": "design", "summary": "WebKit/Firefox checks, Playwright tests, tracing and live-page annotation" }
+  },
+  "agents": {
+    "gate-runner": { "requires": ["gates"], "summary": "Runs the gates in its own context and returns MERGE-SAFE or BLOCKED" },
+    "security-reviewer": { "requires": ["security"], "summary": "Read-only security review of a diff; ranked, evidenced findings" },
+    "architecture-reviewer": { "requires": ["architecture"], "summary": "Read-only boundary and dependency review of a change" },
+    "docs-keeper": { "requires": ["sdlc-init"], "summary": "Verifies .claude/docs claims against the tree and fixes drift" }
+  },
+  "core": ["self-improve", "sdlc-init", "gates", "ship-it", "handoff", "enforcement-audit"],
+  "defaultProfile": "standard",
+  "profiles": {
+    "standard": { "description": "Engineering skills and the delivery workflow (the default).", "skills": ["@domain"] },
+    "full": { "description": "Every skill in the kit, including the design group.", "skills": "*" },
+    "web": { "description": "Full-stack web product, with visual design.", "skills": ["frontend", "backend", "api-design", "security", "architecture", "design-system", "@design"] },
+    "frontend": { "description": "Frontend app or site, with visual design.", "skills": ["frontend", "design-system", "api-design", "security", "@design"] },
+    "service": { "description": "Backend service or API.", "skills": ["backend", "api-design", "security", "architecture"] },
+    "ai-app": { "description": "Product with LLM or agent features.", "skills": ["backend", "api-design", "security", "architecture", "agent-eval"] },
+    "library": { "description": "Library, SDK or CLI.", "skills": ["architecture", "security", "api-design"] },
+    "minimal": { "description": "Workflow and learning loop only.", "skills": [] }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "agent-setup",
+  "description": "André's portable agent setup: one kit of skills, agents and hooks.",
+  "owner": {
+    "name": "André Ramos"
+  },
+  "plugins": [
+    {
+      "name": "agent-setup",
+      "source": "./kit",
+      "description": "The kit: engineering skills (frontend, backend, API, security, architecture, design system, agent evals), visual design and browser-verification skills, SDLC workflow skills and review subagents."
+    }
+  ]
+}

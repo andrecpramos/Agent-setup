@@ -1,0 +1,16 @@
+[
+  { "query": "sdlc-init please, I just installed the agent setup in this repo", "should_trigger": true },
+  { "query": "set up the SDLC for this repo: branches, CI gates, docs for the agents", "should_trigger": true },
+  { "query": "the branch check says the sdlc config is provisional — fix that", "should_trigger": true },
+  { "query": "bootstrap this repository so AI agents know our branch model and checks", "should_trigger": true },
+  { "query": "fill in the TODOs in AGENTS.md from what's actually in the repo and CI", "should_trigger": true },
+  { "query": "we already have a CONTRIBUTING and a CI pipeline; adopt them into the agent contract", "should_trigger": true },
+  { "query": "configura o ciclo de desenvolvimento deste repo para os agentes", "should_trigger": true },
+  { "query": "run the gates and tell me what fails", "should_trigger": false },
+  { "query": "which of our stated rules are actually enforced by CI?", "should_trigger": false },
+  { "query": "commit this and open a PR into develop", "should_trigger": false },
+  { "query": "write an ADR for the new caching layer", "should_trigger": false },
+  { "query": "add a GitHub Actions job that runs e2e tests nightly", "should_trigger": false },
+  { "query": "save a handoff note, I'll continue tomorrow", "should_trigger": false },
+  { "query": "retro: what did we learn this session", "should_trigger": false }
+]

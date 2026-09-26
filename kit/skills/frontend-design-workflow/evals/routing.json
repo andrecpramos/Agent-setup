@@ -1,0 +1,63 @@
+{
+  "$comment": "Routing cases for `agent-setup eval-routing`. `scope` = the skills these cases judge (@design = the catalog's design group); other kit skills may fire alongside and are reported, not judged. `first` = acceptable skills for the FIRST scoped skill the agent activates (any of). `none: true` = no scoped skill may activate. `forbid` = scoped skills that must not activate at any point in the run. `when` = a capability the case assumes; cases whose capability the agent under test lacks (per --assume) are skipped.",
+  "scope": ["@design"],
+  "cases": [
+    {
+      "id": "greenfield-landing",
+      "prompt": "Build a landing page for a specialty coffee roaster called Ember and Oak, as a single index2.html in this folder.",
+      "first": ["frontend-design-workflow", "design-taste-frontend"],
+      "forbid": ["gpt-taste", "imagegen-frontend-web", "brandkit"]
+    },
+    {
+      "id": "brand-look",
+      "prompt": "Restyle index.html so it looks and feels like Linear's website.",
+      "first": ["frontend-design-workflow", "design-md-library"]
+    },
+    {
+      "id": "ui-review",
+      "prompt": "Review the UI in index.html against web best practices and accessibility.",
+      "first": ["web-design-guidelines", "frontend-design-workflow"]
+    },
+    {
+      "id": "screenshot",
+      "prompt": "Take a screenshot of https://example.com and tell me what the page says.",
+      "first": ["agent-browser"],
+      "forbid": ["playwright-cli"]
+    },
+    {
+      "id": "safari-test",
+      "prompt": "Write a Playwright test that checks the Buy button in index.html is visible in Safari.",
+      "first": ["playwright-cli"],
+      "forbid": ["agent-browser"]
+    },
+    {
+      "id": "motion-heavy-non-gpt",
+      "prompt": "Build an Awwwards-style portfolio page with heavy GSAP scroll animations as portfolio.html in this folder.",
+      "first": ["frontend-design-workflow", "design-taste-frontend"],
+      "forbid": ["gpt-taste"],
+      "when": "non-gpt-model"
+    },
+    {
+      "id": "redesign-existing",
+      "prompt": "The site in index.html looks generic and cheap. Upgrade its design without changing its content.",
+      "first": ["frontend-design-workflow", "redesign-existing-projects", "design-taste-frontend"]
+    },
+    {
+      "id": "no-image-generation",
+      "prompt": "Create a landing page for a meditation app as landing.html in this folder.",
+      "first": ["frontend-design-workflow", "design-taste-frontend"],
+      "forbid": ["image-to-code", "imagegen-frontend-web"],
+      "when": "no-image-generation"
+    },
+    {
+      "id": "negative-python",
+      "prompt": "Write a Python function that parses a CSV file into a list of dicts. Just show the code.",
+      "none": true
+    },
+    {
+      "id": "negative-backend",
+      "prompt": "Add a POST /orders endpoint to an Express server that validates the body with zod. Just show the code.",
+      "none": true
+    }
+  ]
+}

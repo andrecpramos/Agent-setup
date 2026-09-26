@@ -1,0 +1,10 @@
+# Machine-local state: the registry of projects this kit is installed in
+.state/
+
+# Skill-creator eval workspaces and scratch
+*-workspace/
+node_modules/
+
+# Local Claude Code settings
+.claude/settings.local.json
+CLAUDE.local.md

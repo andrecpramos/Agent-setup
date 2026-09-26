@@ -1,0 +1,172 @@
+{
+  "$comment": "Everything in the kit that comes from somewhere else. VENDORED skills: `agent-setup vendor sync` copies each upstream skill into kit/skills/<name>/, re-applies the frontmatter overrides below (description, compatibility, removeKeys) and writes one licence per source to kit/licenses/. Never hand-edit a vendored skill folder: the next sync overwrites it. Change this file instead; `why` records the reason for every local patch. Overrides keep every skill valid under the Agent Skills spec (agentskills.io), so the kit loads in any agent that reads SKILL.md folders. DERIVED sources: improved in the kit and no longer mirrored; only their fingerprints are kept, in vendor.lock.json (changes and reasons: docs/sdlc-changes.md). A derived source is only ever read.",
+  "repos": {
+    "taste-skill": {
+      "github": "Leonxlnx/taste-skill",
+      "license": "MIT",
+      "watch": "skills"
+    },
+    "awesome-design-md": {
+      "github": "VoltAgent/awesome-design-md",
+      "license": "MIT"
+    },
+    "vercel-agent-skills": {
+      "github": "vercel-labs/agent-skills"
+    },
+    "agent-browser": {
+      "github": "vercel-labs/agent-browser",
+      "license": "Apache-2.0"
+    },
+    "playwright-cli": {
+      "github": "microsoft/playwright-cli",
+      "license": "Apache-2.0"
+    }
+  },
+  "skills": [
+    {
+      "name": "design-taste-frontend",
+      "repo": "taste-skill",
+      "path": "skills/taste-skill"
+    },
+    {
+      "name": "gpt-taste",
+      "repo": "taste-skill",
+      "path": "skills/gpt-tasteskill",
+      "description": "Stricter variant of design-taste-frontend tuned for GPT-family models (Codex, ChatGPT, GPT in Cursor or Copilot): high layout variance, mandatory GSAP scroll motion, gapless bento grids, AIDA page structure. Use instead of design-taste-frontend only when running on a GPT-family model AND the brief calls for a motion-rich marketing or Awwwards-style page. Never use it together with design-taste-frontend, and not for calm, trust-first or public-sector briefs.",
+      "compatibility": "Tuned for GPT-family models. Claude and Gemini models should use design-taste-frontend.",
+      "why": "Upstream describes a generic 'elite GSAP engineer', which competes with design-taste-frontend on every model. Scoped to the case it was written for: its mandatory motion is wrong for calm briefs."
+    },
+    {
+      "name": "image-to-code",
+      "repo": "taste-skill",
+      "path": "skills/image-to-code-skill",
+      "description": "Image-first website pipeline: generate section-by-section design images, analyze them in depth, then implement the site to match them closely. Use for visually important landing pages and marketing sites when the agent has an image-generation tool and the user has not supplied designs. Without image generation, use design-taste-frontend instead.",
+      "compatibility": "Requires an image-generation tool in the agent (for example Codex, ChatGPT, Gemini, or an image-generation MCP server).",
+      "why": "Upstream says 'for Codex' and demands image generation for every visual web task. Scoped to environments that can generate images, and to page-level work."
+    },
+    {
+      "name": "imagegen-frontend-web",
+      "repo": "taste-skill",
+      "path": "skills/imagegen-frontend-web",
+      "description": "Generates premium website design reference images, one horizontal image per section, for landing pages, marketing sites and product comps. Images only, no code. Use when the deliverable is website comps or mockups rather than a built site.",
+      "compatibility": "Requires an image-generation tool in the agent (for example Codex, ChatGPT, Gemini, or an image-generation MCP server).",
+      "why": "Upstream description is ~900 characters of output rules. Shortened to what decides triggering, and the image-generation requirement made explicit."
+    },
+    {
+      "name": "imagegen-frontend-mobile",
+      "repo": "taste-skill",
+      "path": "skills/imagegen-frontend-mobile",
+      "description": "Generates premium mobile app screen concepts and flows (iOS, Android, cross-platform), shown inside a subtle phone frame. Images only, no code. Use when the deliverable is app screens, flows or mockups.",
+      "compatibility": "Requires an image-generation tool in the agent (for example Codex, ChatGPT, Gemini, or an image-generation MCP server).",
+      "why": "Same as imagegen-frontend-web."
+    },
+    {
+      "name": "brandkit",
+      "repo": "taste-skill",
+      "path": "skills/brandkit",
+      "description": "Generates brand-kit and identity board images: logo directions, color palettes, typography, identity applications and mockups. Images only, no code. Use when the deliverable is a brand identity, logo concepts or a brand-guidelines board.",
+      "compatibility": "Requires an image-generation tool in the agent (for example Codex, ChatGPT, Gemini, or an image-generation MCP server).",
+      "why": "Same as imagegen-frontend-web."
+    },
+    {
+      "name": "redesign-existing-projects",
+      "repo": "taste-skill",
+      "path": "skills/redesign-skill"
+    },
+    {
+      "name": "high-end-visual-design",
+      "repo": "taste-skill",
+      "path": "skills/soft-skill",
+      "description": "Style layer for a soft, calm, expensive look: premium type, generous whitespace, diffuse depth, spring motion. Use on top of design-taste-frontend once the direction is chosen as premium, soft, luxury or agency-polished. Blocks the defaults that make AI designs look cheap. Use at most one style layer per project.",
+      "why": "Upstream description reads as a standalone design skill and competes with design-taste-frontend. Recast as a style layer so the two compose instead of racing to trigger."
+    },
+    {
+      "name": "minimalist-ui",
+      "repo": "taste-skill",
+      "path": "skills/minimalist-skill",
+      "description": "Style layer for clean editorial interfaces (Notion / Linear feel): warm monochrome palette, typographic contrast, flat bento grids, muted pastels, no gradients or heavy shadows. Use on top of design-taste-frontend once the direction is chosen as minimalist, editorial or calm. Use at most one style layer per project.",
+      "why": "Same as high-end-visual-design: make it a layer, not a competitor."
+    },
+    {
+      "name": "industrial-brutalist-ui",
+      "repo": "taste-skill",
+      "path": "skills/brutalist-skill",
+      "description": "Style layer for raw mechanical interfaces fusing Swiss typographic print with military-terminal aesthetics: rigid grids, extreme type-scale contrast, utilitarian color, analog degradation effects. Use on top of design-taste-frontend once the direction is chosen as brutalist, industrial, Swiss or terminal. Use at most one style layer per project.",
+      "why": "Same as high-end-visual-design: make it a layer, not a competitor."
+    },
+    {
+      "name": "stitch-design-taste",
+      "repo": "taste-skill",
+      "path": "skills/stitch-skill",
+      "description": "Writes a project DESIGN.md (Google Stitch semantic format) that locks the visual system: atmosphere, color roles with hex values, typography, component states, layout, motion and banned patterns. Use to persist design decisions so later sessions and other agents build consistently, or when a DESIGN.md for Google Stitch is requested. Works without Stitch.",
+      "why": "Upstream description only mentions Google Stitch, so it never triggers for the case the workflow needs: persisting the chosen design system as DESIGN.md in any project."
+    },
+    {
+      "name": "full-output-enforcement",
+      "repo": "taste-skill",
+      "path": "skills/output-skill"
+    },
+    {
+      "name": "web-design-guidelines",
+      "repo": "vercel-agent-skills",
+      "path": "skills/web-design-guidelines",
+      "description": "Review UI code for Web Interface Guidelines compliance (accessibility, forms, focus, motion, typography, performance, copy). Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\", and as the final audit step after building or restyling UI.",
+      "compatibility": "Requires network access to fetch the guidelines from raw.githubusercontent.com.",
+      "why": "Upstream only triggers on explicit review requests. Adds the post-build audit trigger the workflow relies on, and declares the network requirement."
+    },
+    {
+      "name": "agent-browser",
+      "repo": "agent-browser",
+      "path": "skills/agent-browser",
+      "description": "Browser automation CLI for AI agents (Chrome/Chromium via CDP, accessibility-tree snapshots with @eN refs). Default tool for visually verifying frontend work: screenshots across viewports and devices, dark mode and reduced-motion emulation, console and page errors, axe accessibility audits, exploratory QA (dogfood). Also use to navigate sites, fill forms, click, extract data, log in, automate Electron apps (VS Code, Slack, Discord, Figma, Notion), or access protected Vercel deployments. For WebKit/Firefox, Playwright test files, forced-colors emulation or tracing, use playwright-cli instead.",
+      "compatibility": "Requires shell access and the agent-browser CLI (npm i -g agent-browser && agent-browser install). Agents without a shell can run `agent-browser mcp` as an MCP server instead.",
+      "removeKeys": [
+        "hidden"
+      ],
+      "why": "Upstream says \"Prefer agent-browser over any built-in browser automation or web tools\", which fights playwright-cli for every browser task and can hijack plain web fetches; replaced with an explicit lane. `hidden` is not an Agent Skills field: the official validator (skills-ref) fails the skill and claude.ai rejects it."
+    },
+    {
+      "name": "playwright-cli",
+      "repo": "playwright-cli",
+      "path": "skills/playwright-cli",
+      "description": "Microsoft's Playwright CLI for cross-browser automation (Chromium, Firefox, WebKit/Safari). Use when a check needs a non-Chromium engine, when writing, generating, running or debugging Playwright test files, for forced-colors / high-contrast / print emulation, tracing, video, request mocking, or when the user should annotate a live page for design feedback (show --annotate). For quick Chromium screenshots and interaction, agent-browser is the default.",
+      "compatibility": "Requires shell access and @playwright/cli (npm i -g @playwright/cli@latest, then playwright-cli install-browser webkit|firefox|chromium).",
+      "why": "Upstream description is a generic one-liner that overlaps agent-browser completely. Replaced with the capabilities only this tool has."
+    }
+  ],
+  "excluded": [
+    {
+      "repo": "taste-skill",
+      "path": "skills/taste-skill-v1",
+      "why": "Superseded by design-taste-frontend (v2). Two versions of one skill compete for the same prompts. Pin it only if a project depends on exact v1 behaviour."
+    }
+  ],
+  "assets": [
+    {
+      "into": "design-md-library/assets/brands",
+      "repo": "awesome-design-md",
+      "path": "design-md",
+      "file": "DESIGN.md",
+      "index": {
+        "file": "design-md-library/INDEX.md",
+        "readme": "README.md"
+      }
+    }
+  ],
+  "derived": {
+    "sdlc-kit": {
+      "source": "C:/Users/andre/Desktop/sdlc-kit",
+      "author": "André Ramos",
+      "why": "The kit's runtime hooks, the sdlc-init skill (bootstrap procedure, templates, schema, examples) and the enforcement-audit method are derived from it and improved; every change and its reason is in docs/sdlc-changes.md. The original folder is never modified.",
+      "into": [
+        "kit/hooks/_config.mjs",
+        "kit/hooks/branch-check.mjs",
+        "kit/hooks/guard-git.mjs",
+        "kit/hooks/check-gates.mjs",
+        "kit/settings.fragment.json",
+        "kit/skills/sdlc-init/",
+        "kit/skills/enforcement-audit/"
+      ]
+    }
+  }
+}
